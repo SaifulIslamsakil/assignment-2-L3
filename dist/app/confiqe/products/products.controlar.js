@@ -46,7 +46,25 @@ const getAllProductsControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
         const result = yield products_service_1.productsService.getAllProductsService();
         res.status(200).json({
             success: true,
-            message: "Product created successfully!",
+            message: "Product find successfully!",
+            data: result
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "somthing went wrong!",
+            error: error
+        });
+    }
+});
+const getProductByIdControlar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const result = yield products_service_1.productsService.getProductByIdService(id);
+        res.status(200).json({
+            success: true,
+            message: "Product find successfully!",
             data: result
         });
     }
@@ -60,5 +78,6 @@ const getAllProductsControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
 });
 exports.productsControlar = {
     createProductsControlar,
-    getAllProductsControlar
+    getAllProductsControlar,
+    getProductByIdControlar
 };
