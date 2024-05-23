@@ -20,7 +20,6 @@ const getAllProductsService = () => __awaiter(void 0, void 0, void 0, function* 
     return result;
 });
 const getProductByIdService = (productId) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log({ productId });
     const result = yield products_model_1.ProductsModels.ProductsModel.findOne({ _id: productId });
     return result;
 });

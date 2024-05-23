@@ -12,7 +12,6 @@ const getAllProductsService = async ()=>{
 } 
 
 const getProductByIdService = async (productId : string )=>{
-    console.log({productId})
     const result = await ProductsModels.ProductsModel.findOne({_id:productId })
     return result
 }
