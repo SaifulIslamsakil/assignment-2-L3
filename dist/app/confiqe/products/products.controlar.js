@@ -46,7 +46,7 @@ const getAllProductsControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
         const result = yield products_service_1.productsService.getAllProductsService();
         res.status(200).json({
             success: true,
-            message: "Product find successfully!",
+            message: "Product fetched  successfully!",
             data: result
         });
     }
@@ -64,8 +64,36 @@ const getProductByIdControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
         const result = yield products_service_1.productsService.getProductByIdService(id);
         res.status(200).json({
             success: true,
-            message: "Product find successfully!",
+            message: "Product fetched  successfully!",
             data: result
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "somthing went wrong!",
+            error: error
+        });
+    }
+});
+const productsUpdateControlar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const body = req.body;
+        const { error, value } = products_validation_1.default.validate(body);
+        if (error) {
+            res.status(500).json({
+                success: false,
+                message: "somthing went wrong!",
+                error: error.details
+            });
+        }
+        const result = yield products_service_1.productsService.productsUpdateService(value, id);
+        console.log(result);
+        res.status(200).json({
+            success: true,
+            message: "Product updated successfully!",
+            date: result
         });
     }
     catch (error) {
@@ -79,5 +107,6 @@ const getProductByIdControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
 exports.productsControlar = {
     createProductsControlar,
     getAllProductsControlar,
-    getProductByIdControlar
+    getProductByIdControlar,
+    productsUpdateControlar
 };

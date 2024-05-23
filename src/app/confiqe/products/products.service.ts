@@ -16,8 +16,45 @@ const getProductByIdService = async (productId : string )=>{
     return result
 }
 
+const productsUpdateService = async (value: Products, Id: string)=>{     
+    const result = await ProductsModels.ProductsModel.findByIdAndUpdate(Id, {
+        $set:{
+            name:value?.name,
+            description:value?.description,
+            price:value?.price,
+            category:value?.category,
+            tags:value.tags,
+            variants:value?.variants,
+            inventory:value?.inventory
+
+        }
+    })
+    return result
+}
+// {
+//     "name": "iPhone 13",
+//     "description": "A sleek and powerful smartphone with cutting-edge features.",
+//     "price": 999,
+//     "category": "Electronics",
+//     "tags": ["smartphone", "Apple", "iOS"],
+//     "variants": [
+//         {
+//             "type": "Color",
+//             "value": "Midnight Blue"
+//         },
+//         {
+//             "type": "Storage Capacity",
+//             "value": "256GB"
+//         }
+//     ],
+//     "inventory": {
+//         "quantity": 50,
+//         "inStock": true
+//     }
+// }
 export const productsService = {
     createProductsService ,
     getAllProductsService,
-    getProductByIdService
+    getProductByIdService,
+    productsUpdateService
 }

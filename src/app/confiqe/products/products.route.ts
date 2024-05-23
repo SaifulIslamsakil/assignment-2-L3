@@ -6,4 +6,6 @@ const createProductsRoute = express.Router()
 createProductsRoute.post("/products", productsControlar.createProductsControlar)
 createProductsRoute.get("/products", productsControlar.getAllProductsControlar)
 createProductsRoute.get("/products/:productId", productsControlar.getProductByIdControlar)
+createProductsRoute.put("/products/:productId", productsControlar.productsUpdateControlar)
+
 export default createProductsRoute

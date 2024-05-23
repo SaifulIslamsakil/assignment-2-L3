@@ -23,8 +23,44 @@ const getProductByIdService = (productId) => __awaiter(void 0, void 0, void 0, f
     const result = yield products_model_1.ProductsModels.ProductsModel.findOne({ _id: productId });
     return result;
 });
+const productsUpdateService = (value, Id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield products_model_1.ProductsModels.ProductsModel.findByIdAndUpdate(Id, {
+        $set: {
+            name: value === null || value === void 0 ? void 0 : value.name,
+            description: value === null || value === void 0 ? void 0 : value.description,
+            price: value === null || value === void 0 ? void 0 : value.price,
+            category: value === null || value === void 0 ? void 0 : value.category,
+            tags: value.tags,
+            variants: value === null || value === void 0 ? void 0 : value.variants,
+            inventory: value === null || value === void 0 ? void 0 : value.inventory
+        }
+    });
+    return result;
+});
+// {
+//     "name": "iPhone 13",
+//     "description": "A sleek and powerful smartphone with cutting-edge features.",
+//     "price": 999,
+//     "category": "Electronics",
+//     "tags": ["smartphone", "Apple", "iOS"],
+//     "variants": [
+//         {
+//             "type": "Color",
+//             "value": "Midnight Blue"
+//         },
+//         {
+//             "type": "Storage Capacity",
+//             "value": "256GB"
+//         }
+//     ],
+//     "inventory": {
+//         "quantity": 50,
+//         "inStock": true
+//     }
+// }
 exports.productsService = {
     createProductsService,
     getAllProductsService,
-    getProductByIdService
+    getProductByIdService,
+    productsUpdateService
 };
