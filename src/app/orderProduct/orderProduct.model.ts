@@ -6,7 +6,7 @@ const OderProductSchema = new Schema<OderProduct>({
     email:{
         type:String,
         required:true,
-        match:/@.+\@.+\..+/
+        match:/.+\@.+\..+/
     },
     productId:{
         type:String,

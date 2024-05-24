@@ -5,7 +5,7 @@ const OderProductSchema = new mongoose_1.Schema({
     email: {
         type: String,
         required: true,
-        match: /@.+\@.+\..+/
+        match: /.+\@.+\..+/
     },
     productId: {
         type: String,
