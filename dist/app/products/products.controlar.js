@@ -90,7 +90,6 @@ const productsUpdateControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
             });
         }
         const result = yield products_service_1.productsService.productsUpdateService(value, id);
-        console.log(result);
         res.status(200).json({
             success: true,
             message: "Product updated successfully!",
@@ -108,7 +107,7 @@ const productsUpdateControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
 const productDeleteControlar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.productId;
-        const result = yield products_service_1.productsService.productDeleteService(id);
+        yield products_service_1.productsService.productDeleteService(id);
         res.status(200).json({
             success: true,
             message: "Product deleted successfully!",

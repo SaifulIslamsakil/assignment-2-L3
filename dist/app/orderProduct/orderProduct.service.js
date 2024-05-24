@@ -16,7 +16,7 @@ exports.oderPoductService = void 0;
 const products_model_1 = require("../products/products.model");
 const orderProduct_model_1 = __importDefault(require("./orderProduct.model"));
 const oderPoductIntoDB = (value, currentQuantity) => __awaiter(void 0, void 0, void 0, function* () {
-    const updateProduct = yield products_model_1.ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
+    yield products_model_1.ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
         $set: {
             "inventory.quantity": currentQuantity
         }

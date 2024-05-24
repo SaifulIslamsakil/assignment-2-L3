@@ -29,17 +29,23 @@ const oderProductCreate = (req, res) => __awaiter(void 0, void 0, void 0, functi
         }
         const { productId, quantity } = value;
         const findProduct = yield products_model_1.ProductsModels.ProductsModel.findById(productId);
-        const productQuantity = findProduct === null || findProduct === void 0 ? void 0 : findProduct.inventory.quantity;
-        const productInstok = findProduct === null || findProduct === void 0 ? void 0 : findProduct.inventory.inStock;
-        if (productInstok === false || productQuantity < quantity) {
+        if (!findProduct) {
             return res.status(404).json({
                 success: false,
-                message: "Order not found"
+                message: "Product not found"
+            });
+        }
+        const productQuantity = findProduct === null || findProduct === void 0 ? void 0 : findProduct.inventory.quantity;
+        const productInstok = findProduct === null || findProduct === void 0 ? void 0 : findProduct.inventory.inStock;
+        if (!productInstok || productQuantity < quantity) {
+            return res.status(404).json({
+                success: false,
+                message: "Insufficient stock"
             });
         }
         const currentQuantity = productQuantity - quantity;
         if (currentQuantity == 0) {
-            const updateProduct = yield products_model_1.ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
+            yield products_model_1.ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
                 $set: {
                     "inventory.inStock": false
                 }

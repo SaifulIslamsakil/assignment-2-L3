@@ -5,8 +5,7 @@ import OderProductSchemaModel from "./orderProduct.model";
 
 
 const oderPoductIntoDB = async(value:OderProduct, currentQuantity:number)=>{
-   
-    const updateProduct = await ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
+    await ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
         $set:{
             "inventory.quantity" : currentQuantity
         }

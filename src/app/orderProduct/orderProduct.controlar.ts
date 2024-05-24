@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import orderProductValidationSchema from "./orderProduct.validation";
 import { oderPoductService } from "./orderProduct.service";
 import { ProductsModels } from "../products/products.model";
+import { Products } from "../products/products.interface";
 
 const oderProductCreate = async (req: Request, res: Response) => {
     try {
@@ -15,22 +16,27 @@ const oderProductCreate = async (req: Request, res: Response) => {
             })
         }
         const { productId, quantity } = value
-        const findProduct = await ProductsModels.ProductsModel.findById(productId)
-
-        const productQuantity : number | undefined = findProduct?.inventory.quantity
-        const productInstok = findProduct?.inventory.inStock
-
-        if (productInstok === false || productQuantity  < quantity) {
+        const findProduct : Products | null = await ProductsModels.ProductsModel.findById(productId)
+        if(!findProduct){
             return res.status(404).json({
                 success: false,
-                message: "Order not found"
+                message: "Product not found"
+            })
+        }
+        const productQuantity : number = findProduct?.inventory.quantity 
+        const productInstok : boolean = findProduct?.inventory.inStock 
+
+        if (!productInstok || productQuantity < quantity) {
+            return res.status(404).json({
+                success: false,
+                message: "Insufficient stock"
             })
         }
 
         const currentQuantity: number = productQuantity - quantity
 
         if (currentQuantity == 0) {
-            const updateProduct = await ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
+        await ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
                 $set: {
                     "inventory.inStock": false
                 }
@@ -54,7 +60,7 @@ const oderProductCreate = async (req: Request, res: Response) => {
 
 const getAllOderControlar = async (req: Request, res: Response) => {
     try {
-        const query: any = req.query.email
+        const query: string = req.query.email as string
         const result = await oderPoductService.getAllOderIntoDB(query)
         res.status(200).json({
             success: true,
