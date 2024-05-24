@@ -17,4 +17,13 @@ app.get('/', (req: Request, res: Response) => {
 
 
 
+app.all("*", (req: Request, res: Response)=>{
+  res.status(400).json({
+    success : false,
+    messes : " Route in not found "
+
+  }))
+
+
+
 export default app

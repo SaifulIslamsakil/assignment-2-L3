@@ -15,4 +15,10 @@ app.use("/api", oderProduct_route_1.default);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+app.all("*", (req, res) => {
+    res.status(400).json({
+        success: false,
+        messes: " Route in not found "
+    });
+});
 exports.default = app;
