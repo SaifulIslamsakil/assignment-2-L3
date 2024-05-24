@@ -15,9 +15,12 @@ const createProductsService = (value) => __awaiter(void 0, void 0, void 0, funct
     const result = yield products_model_1.ProductsModels.ProductsModel.create(value);
     return result;
 });
-const getAllProductsService = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    if (query) {
-        const result = yield products_model_1.ProductsModels.ProductsModel.find({ name: query });
+const getAllProductsService = (name) => __awaiter(void 0, void 0, void 0, function* () {
+    if (name) {
+        const query = {
+            name: { $regex: name, $options: 'i' }
+        };
+        const result = yield products_model_1.ProductsModels.ProductsModel.find(query);
         return result;
     }
     const result = yield products_model_1.ProductsModels.ProductsModel.find();

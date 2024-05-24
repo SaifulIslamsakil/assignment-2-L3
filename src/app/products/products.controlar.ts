@@ -7,7 +7,7 @@ const createProductsControlar = async (req: Request, res: Response) => {
         const body = req?.body
         const { error, value } = ProductsValidtionSchema.validate(body)
         if (error) {
-            res.status(500).json({
+           return res.status(500).json({
                 success: false,
                 message: "somthing went wrong!",
                 error: error.details
@@ -30,7 +30,8 @@ const createProductsControlar = async (req: Request, res: Response) => {
 
 const getAllProductsControlar = async (req: Request, res: Response) => {
     try {
-        const result = await productsService.getAllProductsService()
+        const quray:any = req.query.searchTerm 
+        const result = await productsService.getAllProductsService(quray)
         res.status(200).json({
             success: true,
             message: "Product fetched  successfully!",
@@ -92,9 +93,29 @@ const productsUpdateControlar = async (req: Request, res: Response) => {
     }
 }
 
+const productDeleteControlar = async(req:Request, res:Response)=>{
+   try {
+    const id = req.params.productId
+    const result = await productsService.productDeleteService(id)
+    res.status(200).json({
+        success: true,
+        message: "Product deleted successfully!",
+        date: result
+    })
+   } catch (error) {
+    res.status(500).json({
+        success: false,
+        message: "somthing went wrong!",
+        error: error
+    })
+   }
+
+}
+
 export const productsControlar = {
     createProductsControlar,
     getAllProductsControlar,
     getProductByIdControlar,
-    productsUpdateControlar
+    productsUpdateControlar,
+    productDeleteControlar
 }

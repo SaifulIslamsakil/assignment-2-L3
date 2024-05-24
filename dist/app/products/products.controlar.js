@@ -20,7 +20,7 @@ const createProductsControlar = (req, res) => __awaiter(void 0, void 0, void 0, 
         const body = req === null || req === void 0 ? void 0 : req.body;
         const { error, value } = products_validation_1.default.validate(body);
         if (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 success: false,
                 message: "somthing went wrong!",
                 error: error.details
