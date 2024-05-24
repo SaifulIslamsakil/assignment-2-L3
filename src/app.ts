@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import cors from "cors"
 import express from 'express'
 import createProductsRoute from "./app/products/products.route"
-import oderProductRoute from "./app/oderProduct/oderProduct.route"
+import oderProductRoute from "./app/orderProduct/orderProduct.route"
 const app = express()
 
 app.use(express.json())

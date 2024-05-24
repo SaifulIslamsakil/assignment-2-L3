@@ -14,6 +14,7 @@ export type Products = {
     category:string;
     tags:string[];
     variants: Variants;
-    inventory : Inventory
+    inventory : Inventory,
+    isDeleted :boolean
 
 }

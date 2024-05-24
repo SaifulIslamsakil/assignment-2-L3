@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import orderProductValidationSchema from "./oderProduct.validation";
-import { oderPoductService } from "./oderProduct.service";
+import orderProductValidationSchema from "./orderProduct.validation";
+import { oderPoductService } from "./orderProduct.service";
 import { ProductsModels } from "../products/products.model";
 
 const oderProductCreate = async (req: Request, res: Response) => {

@@ -1,5 +1,5 @@
 import express from "express"
-import { oderPoductControlar } from "./oderProduct.controlar"
+import { oderPoductControlar } from "./orderProduct.controlar"
 
 
 const oderProductRoute = express.Router()

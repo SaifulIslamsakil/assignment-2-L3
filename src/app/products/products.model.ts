@@ -26,7 +26,7 @@ const ProductsSchema = new Schema<Products>({
     name:{
         type:String,
         required:true,
-        unique:true
+        // unique:true
     },
     description:{
         type:String,
@@ -45,7 +45,20 @@ const ProductsSchema = new Schema<Products>({
         required:true
     },
     variants:[VariantsSchema],
-    inventory:InventorySchema
+    inventory:InventorySchema,
+    isDeleted : {
+        type:Boolean,
+        default:false
+    }
+})
+
+ProductsSchema.pre("find", function(next){
+    this.find({isDeleted : {$ne: true}})
+    next()
+})
+ProductsSchema.pre("findOne", function(next){
+    this.findOne({isDeleted : {$ne: true}})
+    next()
 })
 
 

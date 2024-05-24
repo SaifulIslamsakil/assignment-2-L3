@@ -7,8 +7,11 @@ export default [
   {
     languageOptions: { globals: globals.browser },
     rules:{
-      "no-unused-vars": "error",
-      "no-unused-console":"wrn"
+      'no-unused-vars': 'error',
+      'no-undef': 'error',
+      'no-console': 'warn',
+      'no-unused-expressions': 'error',
+      'prefer-const': 'error',
     }
   },
   pluginJs.configs.recommended,

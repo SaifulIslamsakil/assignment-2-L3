@@ -100,7 +100,8 @@ const productDeleteControlar = async(req:Request, res:Response)=>{
     res.status(200).json({
         success: true,
         message: "Product deleted successfully!",
-        date: result
+        date:null,
+        // date: result
     })
    } catch (error) {
     res.status(500).json({

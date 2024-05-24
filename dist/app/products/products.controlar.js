@@ -112,7 +112,8 @@ const productDeleteControlar = (req, res) => __awaiter(void 0, void 0, void 0, f
         res.status(200).json({
             success: true,
             message: "Product deleted successfully!",
-            date: result
+            date: null,
+            // date: result
         });
     }
     catch (error) {

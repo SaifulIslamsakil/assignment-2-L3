@@ -1,7 +1,7 @@
 
 import { ProductsModels } from "../products/products.model";
-import { OderProduct } from "./oderPoduct.interface";
-import OderProductSchemaModel from "./oderProduct.model";
+import { OderProduct } from "./orderPoduct.interface";
+import OderProductSchemaModel from "./orderProduct.model";
 
 
 const oderPoductIntoDB = async(value:OderProduct, currentQuantity:number)=>{

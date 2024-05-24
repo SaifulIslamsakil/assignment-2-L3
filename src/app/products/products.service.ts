@@ -11,7 +11,7 @@ const getAllProductsService = async (name: string) => {
         const query =  { 
             name: { $regex: name, $options: 'i' } 
         };        
-        const result = await ProductsModels.ProductsModel.find(query);
+        const result = await ProductsModels.ProductsModel.findOne(query);
         return result;
     }
     const result = await ProductsModels.ProductsModel.find()
@@ -42,7 +42,8 @@ const productsUpdateService = async (value: Products, productId: string) => {
 }
 
 const productDeleteService = async (productId: string) => {
-    const result = await ProductsModels.ProductsModel.deleteOne({ _id: productId })
+    const result = await ProductsModels.ProductsModel.updateOne({ _id: productId }, {isDeleted:true})
+    // const result = await ProductsModels.ProductsModel.deleteOne({ _id: productId })
     return result
 }
 

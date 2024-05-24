@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { OderProduct } from "./oderPoduct.interface";
+import { OderProduct } from "./orderPoduct.interface";
 
 
 const OderProductSchema = new Schema<OderProduct>({
@@ -21,6 +21,7 @@ const OderProductSchema = new Schema<OderProduct>({
         required:true
     }
 })
+
 
 
 const OderProductSchemaModel = model<OderProduct>("oderProduct", OderProductSchema)

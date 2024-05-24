@@ -20,7 +20,7 @@ const getAllProductsService = (name) => __awaiter(void 0, void 0, void 0, functi
         const query = {
             name: { $regex: name, $options: 'i' }
         };
-        const result = yield products_model_1.ProductsModels.ProductsModel.find(query);
+        const result = yield products_model_1.ProductsModels.ProductsModel.findOne(query);
         return result;
     }
     const result = yield products_model_1.ProductsModels.ProductsModel.find();
@@ -45,7 +45,8 @@ const productsUpdateService = (value, productId) => __awaiter(void 0, void 0, vo
     return result;
 });
 const productDeleteService = (productId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield products_model_1.ProductsModels.ProductsModel.deleteOne({ _id: productId });
+    const result = yield products_model_1.ProductsModels.ProductsModel.updateOne({ _id: productId }, { isDeleted: true });
+    // const result = await ProductsModels.ProductsModel.deleteOne({ _id: productId })
     return result;
 });
 exports.productsService = {
