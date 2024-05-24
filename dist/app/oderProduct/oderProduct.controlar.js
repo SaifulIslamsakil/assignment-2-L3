@@ -45,13 +45,12 @@ const oderProductCreate = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 }
             });
         }
-        const result = oderProduct_service_1.oderPoductService.oderPoductIntoDB(value, currentQuantity);
-        // const result = await oderPoductService.oderPoductIntoDB(value)
-        // res.status(200).json({
-        //     success: true,
-        //     message: "Order created successfully!",
-        //     data: result
-        // })
+        const result = yield oderProduct_service_1.oderPoductService.oderPoductIntoDB(value, currentQuantity);
+        res.status(200).json({
+            success: true,
+            message: "Order created successfully!",
+            data: result
+        });
     }
     catch (error) {
         res.status(500).json({
