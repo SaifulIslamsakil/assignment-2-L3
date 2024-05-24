@@ -25,7 +25,8 @@ const InventorySchema = new Schema<Inventory>({
 const ProductsSchema = new Schema<Products>({
     name:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     description:{
         type:String,

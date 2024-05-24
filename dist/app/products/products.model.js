@@ -25,7 +25,8 @@ const InventorySchema = new mongoose_1.Schema({
 const ProductsSchema = new mongoose_1.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description: {
         type: String,

@@ -1,10 +1,21 @@
+
+import { ProductsModels } from "../products/products.model";
 import { OderProduct } from "./oderPoduct.interface";
 import OderProductSchemaModel from "./oderProduct.model";
 
 
-const oderPoductIntoDB = async(value:OderProduct)=>{
+const oderPoductIntoDB = async(value:OderProduct, currentQuantity:number)=>{
+   
+    const updateProduct = await ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
+        $set:{
+            "inventory.quantity" : currentQuantity
+        }
+    })
+
     const result = await OderProductSchemaModel.create(value)
+    
     return result
+
 }
 
 const getAllOderIntoDB = async(email:string)=>{

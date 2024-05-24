@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.oderPoductControlar = void 0;
 const oderProduct_validation_1 = __importDefault(require("./oderProduct.validation"));
 const oderProduct_service_1 = require("./oderProduct.service");
+const products_model_1 = require("../products/products.model");
 const oderProductCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req === null || req === void 0 ? void 0 : req.body;
@@ -26,12 +27,31 @@ const oderProductCreate = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 error: error.details
             });
         }
-        const result = yield oderProduct_service_1.oderPoductService.oderPoductIntoDB(value);
-        res.status(200).json({
-            success: true,
-            message: "Order created successfully!",
-            data: result
-        });
+        const { productId, quantity } = value;
+        const findProduct = yield products_model_1.ProductsModels.ProductsModel.findById(productId);
+        const productQuantity = findProduct === null || findProduct === void 0 ? void 0 : findProduct.inventory.quantity;
+        const productInstok = findProduct === null || findProduct === void 0 ? void 0 : findProduct.inventory.inStock;
+        if (productInstok === false || productQuantity < quantity) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+        const currentQuantity = productQuantity - quantity;
+        if (currentQuantity == 0) {
+            const updateProduct = yield products_model_1.ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
+                $set: {
+                    "inventory.inStock": false
+                }
+            });
+        }
+        const result = oderProduct_service_1.oderPoductService.oderPoductIntoDB(value, currentQuantity);
+        // const result = await oderPoductService.oderPoductIntoDB(value)
+        // res.status(200).json({
+        //     success: true,
+        //     message: "Order created successfully!",
+        //     data: result
+        // })
     }
     catch (error) {
         res.status(500).json({

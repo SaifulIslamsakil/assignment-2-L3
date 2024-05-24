@@ -13,8 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.oderPoductService = void 0;
+const products_model_1 = require("../products/products.model");
 const oderProduct_model_1 = __importDefault(require("./oderProduct.model"));
-const oderPoductIntoDB = (value) => __awaiter(void 0, void 0, void 0, function* () {
+const oderPoductIntoDB = (value, currentQuantity) => __awaiter(void 0, void 0, void 0, function* () {
+    const updateProduct = yield products_model_1.ProductsModels.ProductsModel.findByIdAndUpdate(value.productId, {
+        $set: {
+            "inventory.quantity": currentQuantity
+        }
+    });
     const result = yield oderProduct_model_1.default.create(value);
     return result;
 });

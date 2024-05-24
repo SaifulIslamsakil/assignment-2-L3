@@ -22,7 +22,7 @@ app.all("*", (req: Request, res: Response)=>{
     success : false,
     messes : " Route in not found "
 
-  }))
+  })})
 
 
 
